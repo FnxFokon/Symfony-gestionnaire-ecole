@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Liste des Eleves</h1>
+	<a class="btn btn-success m-2" href="{{ path('app_student_new') }}">Ajouter un nouvelle eleve</a>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Email</th>
+				<th scope="col">Nom</th>
+				<th scope="col">Prenom</th>
+				<th scope="col">Adresse</th>
+				<th scope="col">Téléphone</th>
+				<th scope="col">Classe</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in students %}
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.infoUser.firstname }}</td>
+					<td>{{ user.infoUser.lastname }}</td>
+					<td>
+						{{ user.infoUser.address }},
+						{{ user.infoUser.zipCode }}
+						{{ user.infoUser.city }}
+					</td>
+					<td>{{ user.infoUser.phone }}</td>
+					<td>
+						<span class="badge rounded-pill" style="{{ color_class(user.schoolClass.label) }}">{{ user.schoolClass.label }}</span>
+					</td>
+					<td>
+						<a class="btn btn-info m-2" href="{{ path('app_student_show', {'id': user.id}) }}">Voir</a>
+						<a class="btn btn-warning m-2" href="{{ path('app_student_edit', {'id': user.id}) }}">Modifier</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">Pas d'Eleve</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a class="btn btn-success m-2" href="{{ path('app_student_new') }}">Ajouter un nouveau eleve</a>
+{% endblock %}

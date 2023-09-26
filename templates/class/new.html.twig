@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Ajouter un nouvelle Eleve dans la classe</h1>
+
+	{{ include('class/_form.html.twig') }}
+
+	<a class="btn btn-info m-2" href="{{ path('app_class_index') }}">Retour à la liste des classes</a>
+{% endblock %}

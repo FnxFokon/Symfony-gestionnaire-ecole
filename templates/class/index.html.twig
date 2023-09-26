@@ -1,0 +1,31 @@
+{% include "base.html.twig" %}
+
+{% block body %}
+	<h1>Listes des classes</h1>
+
+
+	<div class="accordion col-10 mt-5" id="accordionExample">
+		{% for grade, classesArray in classes %}
+			{# for key, value as classes #}
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button {% if loop.first %}show{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#accordeon{{ grade|remove_accents }}" aria-expanded="true" aria-controls="accordeon{{ grade|remove_accents }}">
+						{{ grade }}
+					</button>
+				</h2>
+				<div id="accordeon{{ grade|remove_accents }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						{% for schoolClass in classesArray %}
+							<div class="d-flex justify-content-between align-items-center border m-1">
+								<h4 class="m-3">{{ schoolClass.label }}</h4>
+								<div>
+									<a href="{{ path('app_class_show', {'id': schoolClass.id}) }}" class="btn btn-info m-3">Voir la classe</a>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Ajouter un nouveau professeur</h1>
+
+	{{ include('user/teacher/_form.html.twig') }}
+
+	<a class="btn btn-info m-2" href="{{ path('app_teacher_index') }}">Retour à la liste</a>
+{% endblock %}

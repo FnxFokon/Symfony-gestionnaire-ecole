@@ -1,0 +1,57 @@
+<nav class="navbar bg-body-tertiary fixed-top">
+	<div class="container-fluid">
+		<a class="navbar-brand ms-5" href="/"><img src="/images/logo.png" alt="logo-du-site" style="width:70px;height:70px;"></a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+			<div class="offcanvas-header">
+				<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Ecole ERN23</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+				<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="#">Accueil</a>
+					</li>
+					{% if app.user %}
+						{# Si l'utilisateur est connecter #}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_mon-compte') }}">Mon espace</a>
+						</li>
+						{% if is_granted('ROLE_ADMIN') %}
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Gestion
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item" href="{{ path('app_admin_index') }}">Administrateurs</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_teacher_index') }}">Professeurs</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_student_index') }}">Eleves</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_class_index') }}">Classes</a>
+									</li>
+								</ul>
+							</li>
+						{% endif %}
+
+					{% else %}
+						{# Si l'utilisateur n'est pas connecter #}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
